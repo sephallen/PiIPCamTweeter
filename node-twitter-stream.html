@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+  <head>
+    <title>Thinking Juice Xmas IPCam Tweets</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/bc9fc75b-366a-49f8-9dc9-8f814f32edbb.css"/>
+    <link rel="stylesheet" href="/node-twitter-stream.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+    <script>
+      var socket = io.connect('http://christmaspi:4040');
+      // var socket = io.connect('http://localhost:4040');
+      socket.on('stream', function(tweet, user, avatar, media) {
+        $( "#tweetd" ).fadeOut( function(){
+          $( "body" ).css( "background-image","");
+          $( "#tweetd" ).empty();
+          $('#tweetd').prepend('<div class="image"></div><div><img id="avatar" src="'+avatar+'" width="48" height="48"><span>'+tweet+'</span></div>');
+          if ( media ) {
+            $( "#bg-image" ).css( "background-image","url("+media+")");
+          }
+          $( "#tweetd" ).fadeIn();
+        })
+      });
+    </script>
+  </head>
+  <body>
+    <div id="tweetd">merry christmas ʕ•͡ᴥ•ʔ</div>
+    <div id="bg-image"></div>
+  </body>
+</html>
